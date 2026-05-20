@@ -10,4 +10,4 @@ class Solicitud:
 
     def __str__(self):
         conductor = self.conductor_asignado.nombre if self.conductor_asignado else "Ninguno"
-        return f"[Solicitud: {self.id_solicitud} - {self.origen} a {self.destino} ({self.tipo_servicio}) - Estado: {self.estado}]"
+        return f"[Solicitud: {self.id_solicitud} - de:{self.origen} a {self.destino} ({self.tipo_servicio}) - Estado: {self.estado}]- Conductor: {conductor} - Tarifa: {self.tarifa}]"
