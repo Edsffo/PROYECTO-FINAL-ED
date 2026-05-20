@@ -526,15 +526,15 @@ class Grafo:
         print(self.__str__())
 
 class Conductor:
-    def __init__(self, id_conductor, nombre, tipo_servicio, zona_actual):
-        self.id_conductor=id_conductor
+    def __init__(self, cedula, nombre, tipo_servicio, zona_actual):
+        self.cedula=cedula
         self.nombre=nombre
         self.tipo_servicio=tipo_servicio  # Tipos:"Estándar", "Mascotas", "Equipaje"
         self.zona_actual=zona_actual
         self.disponible=True
 
     def __str__(self):
-        return f"[{self.id_conductor}] {self.nombre} ({self.tipo_servicio}) - Estado: {'Libre' if self.disponible else 'Ocupado'}"
+        return f"[{self.cedula}] {self.nombre} ({self.tipo_servicio}) - Estado: {'Libre' if self.disponible else 'Ocupado'}"
 
 
 
