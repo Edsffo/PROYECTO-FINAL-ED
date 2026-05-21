@@ -7,9 +7,6 @@ class Conductor:
         self.placa=placa
         self.disponible=True
 
-    def esta_habilitado(self, servicio_solicitado):
-        return servicio_solicitado in self.tipo_servicio
-
     def __str__(self):
         estado = "Libre" if self.disponible else "Ocupado"
         return f"[Conductor: [{self.placa}][{self.cedula}] {self.nombre} ({self.tipo_servicio}) - Estado: {estado}]"
