@@ -1,27 +1,40 @@
+class NodoPila:
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+
 class Pila:
     def __init__(self):
-        self._items = []
+        self._cima = None
 
     def push(self, elemento):
-        self._items.append(elemento)
+        nuevo_nodo = NodoPila(elemento)
+        nuevo_nodo.siguiente = self._cima
+        self._cima = nuevo_nodo
+        self.tamaño += 1
 
     def pop(self):
         if self.empty():
             return None
-        return self._items.pop()
+        dato = self._cima.dato
+        self._cima = self._cima.siguiente
+        self.tamaño -= 1
+        return dato
 
     def top(self):
         if self.empty():
             return None
-        return self._items[-1]
+        return self._cima.dato
 
     def empty(self):
-        return len(self._items) == 0
+        return self._cima is None
 
     def size(self):
-        return len(self._items)
+        return self.tamaño
 
     def print_stack(self):
-        for i in range(len(self._items) - 1, -1, -1):
-            print(self._items[i], end=" ")
+        actual = self._cima
+        while actual is not None:
+            print(actual.dato, end=" ")
+            actual = actual.siguiente
         print()

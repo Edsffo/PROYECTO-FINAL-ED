@@ -1,63 +1,73 @@
+class NodoCola:
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+
 class Cola_circular:
 
     def __init__(self, cantidad):
-        self.frente = -1
-        self.fin = -1
+        self.frente: NodoCola = None
+        self.fin: NodoCola = None
         self.cantidad = cantidad
-        self.items = [None] * cantidad
+        self.tamaño = 0
 
     def encolar(self, valor):
-        nuevo_fin = (self.fin + 1) % self.cantidad
-
-        if nuevo_fin == self.frente:
+        if self.tamaño == self.cantidad:
             print("Cola llena")
-            return
-
-        self.fin = nuevo_fin
-        self.items[self.fin] = valor
-
-        if self.frente == -1:
-            self.frente = 0
-
+            return  
+        nuevo_nodo = NodoCola(valor)
+        if self.frente is None:
+            self.frente = nuevo_nodo
+            self.fin = nuevo_nodo
+            nuevo_nodo.siguiente = self.frente
+        else:
+            self.fin.siguiente = nuevo_nodo
+            self.fin = nuevo_nodo
+            self.fin.siguiente = self.frente
+        
+        self.tamaño += 1
         print("Elemento", valor, "encolado")
-
+       
     def desencolar(self):
-        if self.frente == -1:
+        if self.frente is None:
             print("Cola vacía")
             return None
 
-        valor = self.items[self.frente]
+        valor = self.frente.dato
         print("Elemento:", valor, "desencolado")
 
         if self.frente == self.fin:
-            self.frente = self.fin = -1
+            self.frente = None
+            self.fin = None
         else:
-            self.frente = (self.frente + 1) % self.cantidad
+            self.frente = self.frente.siguiente
+            self.fin.siguiente = self.frente
 
+        self.tamaño -= 1
         return valor
 
     def imprimir(self):
-        if self.frente == -1:
+        if self.frente is None:
             print("Cola vacía")
             return
 
         print("Elementos de la cola:", end=" ")
-        i = self.frente
+        tmp = self.frente
 
-        while i != self.fin:
-            print(self.items[i], end=" ")
-            i = (i + 1) % self.cantidad
+        while True:
+            print(tmp.dato, end=" ")
+            tmp = tmp.siguiente
 
-        print(self.items[self.fin])
+            if tmp == self.frente:
+                break
+        print()
 
     def ver_frente(self):
-        if self.frente <= self.fin:
-            return self.items[self.frente]
-        else:
-            return None
+        if self.frente is not None:
+            return self.frente.dato
+        return None
 
     def ver_final(self):
-        if self.frente <= self.fin:
-            return self.items[self.fin]
-        else:
-            return None
+        if self.fin is not None:
+            return self.fin.dato
+        return None
