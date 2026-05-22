@@ -145,3 +145,65 @@ class Cooperativa:
             )
 
             return True, "ok"
+        
+        def mostrar_cola_espera(self):
+            print("\n\t--- COLA DE ESPERA ---")
+            if self.cola_espera.tamaño == 0:
+                print("Sin solicitudes en espera")
+                return
+            tmp = self.cola_espera.frente
+            i = 1
+            while True:
+                s = tmp.dato
+                print(f"{i}. #{s.id} | {s.usuario} | {s.zona_origen} -> {s.zona_destino} | {s.tipo_servicio}")
+                tmp = tmp.siguiente
+                i += 1
+                if tmp == self.cola_espera.frente:
+                    break
+
+        def mostrar_activas(self):
+            print("\n\t--- SERVICIOS EN ATENCION ---")
+            if self.solicitudes_activas.frente is None:
+                print("Sin servicios activos")
+                return
+            tmp = self.solicitudes_activas.frente
+            while tmp is not None:
+                s = tmp.dato
+                conductor = s.conductor_asignado
+                print(f"{s.id} | {s.usuario} | {s.zona_origen} -> {s.zona_destino}")
+                print(f"Conductor: {conductor.nombre} ({conductor.placa})")
+                print(f"Tarifa: ${s.tarifa:,} | Tiempo recogida: {s.tiempo_recogida} min")
+                tmp = tmp.siguiente
+
+        def mostrar_historial(self):
+            print("\n\t--- HISTORIAL DE SERVICIOS ---")
+            if self.historial.frente is None:
+                print("Sin registro en el historial")
+                return
+            tmp = self.historial.frente
+            while tmp is not None:
+                s = tmp.dato
+                nombre_conductor = s.conductor_asignado.nombre if s.conductor_asignado else "N/A"
+                print(f" #{s.id} | {s.usuario} | {s.estado}")
+                print(f" Ruta: {s.zona_origen} -> {s.zona_destino} | Tipo: {s.tipo_servicio}")
+                print(f" Conductor: {nombre_conductor} | Tarifa: {s.tarifa:,}")
+                tmp = tmp.siguiente
+
+        def mostrar_pila_acciones(self):
+            print("\n\t--- CONDUCTORES REGISTRADOS ---")
+            tmp = self.conductores.frente
+            while tmp is not None:
+                c = tmp.dato
+                estado = "Disponible" if c.disponible else "Ocupado"
+                servicios = ", ".join(c.servicios_habilitados)
+                print(f"{c.placa} | {c.nombre} | {estado} | Zona: {c.zona_actual}")
+                print(f" Servicios: {servicios}")
+                tmp = tmp.siguiente
+
+        def mostrar_operadores(self):
+            print("\n\t--- OPERADORES REGISTRADOS ---")
+            tmp = self.operadores.frente
+            while tmp is not None:
+                op = tmp.dato
+                print(f"ID {op.id_operador} | {op.nombre} | Tel: {op.telefono}")
+                tmp = tmp.siguiente
