@@ -32,5 +32,3 @@ class Conductor:
         estado = "Libre" if self.disponible else "Ocupado"
         return f"[Conductor: [{self.placa},{self.cedula},{self.nombre}]- Tipo servicio: [{self.obtener_servicios_habilitados()}] - Estado: [{estado}]"
 
-
-
