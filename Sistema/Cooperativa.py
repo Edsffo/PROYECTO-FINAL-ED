@@ -207,3 +207,11 @@ class Cooperativa:
             op = tmp.dato
             print(f"ID {op.id_operador} | {op.nombre} | Tel: {op.telefono}")
             tmp = tmp.siguiente
+
+    def mostrar_conductores(self):
+        print("\n\t--- CONDUCTORES REGISTRADOS ---")
+        tmp = self.conductores.frente
+        while tmp is not None:
+            c = tmp.dato
+            print(f"{c.nombre} | {c.cedula} | ({c.placa})")
+            tmp = tmp.siguiente
