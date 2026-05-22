@@ -11,5 +11,5 @@ class Solicitud:
 
     def __str__(self):
         conductor = self.conductor_asignado.nombre if self.conductor_asignado else "Ninguno"
-        servicio_pedido = self.tipo_requerido.servicio
+        servicio_pedido = self.tipo_requerido.tipo
         return f"Solicitud: [{self.id_solicitud} - de:{self.origen} a {self.destino} con servicio: ({servicio_pedido})] - Tiempo estimado: [{self.tiempo_estimado}] min - Estado: {self.estado}]- Conductor: {conductor} - Tarifa: {self.tarifa}]"

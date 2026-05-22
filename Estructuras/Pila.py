@@ -6,6 +6,7 @@ class NodoPila:
 class Pila:
     def __init__(self):
         self._cima = None
+        self.tamaño = 0
 
     def push(self, elemento):
         nuevo_nodo = NodoPila(elemento)

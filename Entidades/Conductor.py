@@ -10,7 +10,7 @@ class Conductor:
         self.servicios_habilitados=ListaSimple()
 
     def habilitar_tipo_servicio(self, tipo_servicio):
-        self.servicios_habilitados.insertar(tipo_servicio)
+        self.servicios_habilitados.insertar_fin(tipo_servicio)
 
     def es_habilitado_para(self, tipo_servicio):
         tmp = self.servicios_habilitados.cabeza
