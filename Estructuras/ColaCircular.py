@@ -13,7 +13,6 @@ class Cola_circular:
 
     def encolar(self, valor):
         if self.tamaño == self.cantidad:
-            print("Cola llena")
             return  
         nuevo_nodo = NodoCola(valor)
         if self.frente is None:
@@ -26,15 +25,12 @@ class Cola_circular:
             self.fin.siguiente = self.frente
         
         self.tamaño += 1
-        print("Elemento", valor, "encolado")
        
     def desencolar(self):
         if self.frente is None:
-            print("Cola vacía")
             return None
 
         valor = self.frente.dato
-        print("Elemento:", valor, "desencolado")
 
         if self.frente == self.fin:
             self.frente = None
