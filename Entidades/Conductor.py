@@ -1,10 +1,11 @@
 from Estructuras.ListaSimple import ListaSimple
 
 class Conductor:
-    def __init__(self, placa, nombre, cedula, zona_actual, servicios_habilitados):
+    def __init__(self, placa, nombre, cedula, telefono, zona_actual, servicios_habilitados):
         self.placa = placa
         self.nombre = nombre
         self.cedula = cedula
+        self.telefono = telefono
         self.zona_actual = zona_actual
         self.servicios_habilitados = servicios_habilitados
         self.disponible = True
@@ -19,6 +20,7 @@ class Conductor:
             "nombre": self.nombre,
             "placa": self.placa,
             "cedula": self.cedula,
+            "telefono": self.telefono,
             "zona": self.zona_actual,
             "servicios": self.servicios_habilitados,
             "disponible": self.disponible
