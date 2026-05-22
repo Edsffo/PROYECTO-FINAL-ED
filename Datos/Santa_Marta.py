@@ -46,25 +46,25 @@ class Mapa:
         print("  ║    ZONAS DE SANTA MARTA      ║")
         print("  ╚══════════════════════════════╝")
         for num, zona in self.zonas.items():
-            nombre = zona[3:] if zona[0].isdigit() else zona
-            print(f"    {num}. {nombre}")
+            nombre = zona[3:] if zona[0].isdigit() else zona # Esto es para que al momento del print evitemos numeros duplicados. El [3:] inicia desde el tercer caracter, por ejemplo ("1. Rodadero"), elimina el ("1. ") y solo printea ("Rodadero")
+            print(f"    {num}. {nombre}") # Sin embargo, aquí agregamos el {num}, asi que sale igual, pero evitamos que salga duplicado, por ejemplo ("1. 1. Rodadero")
 
     def mostrar_zonas_codigo(self):
         print("\tZONAS DE SANTA MARTA\t")
-        for num, zona in self.zonas.items():
+        for num, zona in self.zonas.items(): # self.zonas es un diccionario, accede a los números, y pues, el otro valor es la zona, recorre cada dato y le hace un print.
             print(f"    {num}.{zona}")
 
-    def obtener_zona_codigo(self, codigo):
+    def obtener_zona_codigo(self, codigo): # métodos para trabajar con el diccionario, el código son los números mencionados "1, 2, 3... Si escojemos obtener_zona_codigo(1) nos devolverá Rodadero, usamos el get para evitar errores en caso de que no exista un código."
         return self.zonas.get(codigo)
     
-    def validar_zona(self, codigo):
+    def validar_zona(self, codigo): # método para validar una zona en el diccionario, devuelve True o False. 
         return codigo in self.zonas
     
     def calcular_distancia(self, origen, destino):
         if origen not in self.zonas.values() or destino not in self.zonas.values():
-            return float('inf')
+            return float('inf') # si el destino o el origen no existen devuelve una distancia infinita, es decir, no existe.
         
-        distancias = self.grafo.Dijkstra(origen)
+        distancias = self.grafo.Dijkstra(origen) # en caso contrario, usamos el algoritmo para hallar distancias cortas
         vertice_destino = self.grafo.buscarVertice(destino)
 
         if vertice_destino and distancias:
