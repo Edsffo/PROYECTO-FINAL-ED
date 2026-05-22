@@ -42,7 +42,9 @@ class Mapa:
             self.grafo.agregarArista(origen, destino, distancia)
 
     def mostrar_zonas(self):
-        print("\tZONAS DE SANTA MARTA\t")
+        print("  ╔══════════════════════════════╗")
+        print("  ║    ZONAS DE SANTA MARTA      ║")
+        print("  ╚══════════════════════════════╝")
         for num, zona in self.zonas.items():
             nombre = zona[3:] if zona[0].isdigit() else zona
             print(f"    {num}. {nombre}")
@@ -111,7 +113,7 @@ class Mapa:
         tmp = self.grafo.primero
         while tmp:
             vertice = tmp
-            print(f"\n  {vertice.dato}")
+            print(f"\n{vertice.dato}")
             arista = vertice.listaAdyacencia.primera
             if arista is None:
                 print("Sin conexiones activas")
