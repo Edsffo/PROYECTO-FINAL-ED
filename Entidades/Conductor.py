@@ -13,12 +13,20 @@ class Conductor:
         self.servicios_habilitados.insertar_fin(tipo_servicio)
 
     def es_habilitado_para(self, tipo_servicio):
-        tmp = self.servicios_habilitados.cabeza
+        tmp = self.servicios_habilitados.frente
         while tmp is not None:
             if tmp.dato.tipo.lower() == tipo_servicio.tipo.lower():
                 return True
             tmp = tmp.siguiente
         return False
+    
+    def obtener_servicios_habilitados(self):
+        servicios = []
+        tmp = self.servicios_habilitados.frente
+        while tmp is not None:
+            servicios.append(tmp.dato.tipo)
+            tmp = tmp.siguiente
+        return ", ".join(servicios) if servicios else "Ninguno"
 
     def __str__(self):
         estado = "Libre" if self.disponible else "Ocupado"

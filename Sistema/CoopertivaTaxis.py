@@ -5,5 +5,5 @@ from Entidades.Mapa import Mapa
 from Entidades.Solicitudes import Solicitud
 from Entidades.Conductor import Conductor
 from Entidades.Operador import Operador
-from Entidades.TipoTaxi import TipoServicio  # Ajustado a tu archivo TipoTaxi.py
+from Entidades.TipoTaxi import TipoServicio  
 
