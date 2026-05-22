@@ -189,7 +189,7 @@ class Cooperativa:
             print(f" Conductor: {nombre_conductor} | Tarifa: {s.tarifa:,}")
             tmp = tmp.siguiente
 
-    def mostrar_pila_acciones(self):
+    def mostrar_conductores(self):
         print("\n\t--- CONDUCTORES REGISTRADOS ---")
         tmp = self.conductores.frente
         while tmp is not None:
@@ -208,10 +208,12 @@ class Cooperativa:
             print(f"ID {op.id_operador} | {op.nombre} | Tel: {op.telefono}")
             tmp = tmp.siguiente
 
-    def mostrar_conductores(self):
-        print("\n\t--- CONDUCTORES REGISTRADOS ---")
-        tmp = self.conductores.frente
+    def mostrar_pila_acciones(self):
+        print("\n\t--- ULTIMAS ACCIONES ---")
+        if self.pila_acciones.empty():
+            print("Sin acciones registradas")
+            return
+        tmp = self.pila_acciones._cima
         while tmp is not None:
-            c = tmp.dato
-            print(f"{c.nombre} | {c.cedula} | ({c.placa})")
+            print(f"{tmp.dato}")
             tmp = tmp.siguiente
