@@ -16,10 +16,12 @@ from Datos.Santa_Marta import (
 
 from Sistema.Cooperativa import (
     Cooperativa
-)    
+)
+
 
 def limpiar_pantalla():
     os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def leer_entero(mensaje):
     while True:
@@ -28,6 +30,7 @@ def leer_entero(mensaje):
         except ValueError:
             print("Ingrese un número válido.")
 
+
 def leer_entero_rango(mensaje, minimo, maximo):
     while True:
         valor = leer_entero(mensaje)
@@ -35,10 +38,12 @@ def leer_entero_rango(mensaje, minimo, maximo):
             return valor
         print(f"Elige una opción entre {minimo} y {maximo}")
 
+
 def mostrar_tipos_servicio(tipos):
-    print("\nTIPOS DE SERVICIO: ")
+    print("\nTIPOS DE SERVICIOS: ")
     for k, v in tipos.items():
         print(f"{k}. {v['descripcion']}")
+
 
 def menu_nueva_solicitud(coop, zonas, tipos_servicio):
     print("\n  ╔══════════════════════════════╗")
@@ -46,16 +51,16 @@ def menu_nueva_solicitud(coop, zonas, tipos_servicio):
     print("  ╚══════════════════════════════╝")
 
     nombre = input("Nombre del cliente: ")
-    nombre.strip()
+    nombre = nombre.strip()
     if not nombre:
         print("Nombre inválido, operación cancelada.")
         return
-    
+
     telefono = input("Teléfono del cliente: ")
-    telefono.strip()
+    telefono = telefono.strip()
     limpiar_pantalla()
-    print(f"Solicitud registrada correctamente con datos: [{nombre} | {telefono}]")
-    
+    print(f"Solicitud registrada correctamente con los datos: [{nombre} | {telefono}]")
+
     coop.mapa.mostrar_zonas()
     zona_origen_cod = leer_entero_rango("Zona de ORIGEN (número): ", 1, 8)
     zona_destino_cod = leer_entero_rango("Zona de DESTINO (número): ", 1, 8)
@@ -67,8 +72,12 @@ def menu_nueva_solicitud(coop, zonas, tipos_servicio):
     tipo_cod = leer_entero_rango("Tipo de servicio (número): ", 1, 3)
     tipo_nombre = tipos_servicio[tipo_cod]["nombre"]
 
-    sol = coop.registrar_solicitud(nombre, telefono, zona_origen, zona_destino, tipo_nombre)
+    sol, msg = coop.registrar_solicitud(nombre, telefono, zona_origen, zona_destino, tipo_nombre)
+    if sol is None:
+        print(f"No se pudo registrar la solicitud: {msg}")
+        return
     print(f"[Solicitud #{sol.id} registrada y en cola de espera.]")
+
 
 def menu_atender_solicitud(coop):
     print("\n  ╔══════════════════════════════╗")
@@ -82,7 +91,7 @@ def menu_atender_solicitud(coop):
     if solicitud is None:
         print(f"\n{msg}")
         return
-    
+
     conductor = solicitud.conductor_asignado
     print(f"\n  Solicitud #{solicitud.id} asignada exitosamente:")
     print(f"     Cliente:          {solicitud.usuario} ({solicitud.telefono})")
@@ -95,6 +104,7 @@ def menu_atender_solicitud(coop):
     print(f"     Tiempo recogida:  {solicitud.tiempo_recogida} minutos")
     print(f"     Tarifa estimada:  ${solicitud.tarifa:,} COP")
 
+
 def menu_cerrar_servicio(coop):
     print("\n  ╔══════════════════════════════╗")
     print("  ║    CERRAR SERVICIO           ║")
@@ -104,7 +114,7 @@ def menu_cerrar_servicio(coop):
 
     if coop.solicitudes_activas.frente is None:
         return
-    
+
     id_sol = leer_entero("ID de la solicitud a cerrar: ")
     print("¿Cómo se cierra?")
     print("1. Finalizado (servicio completado)")
@@ -118,6 +128,7 @@ def menu_cerrar_servicio(coop):
     else:
         print(f"{msg}")
 
+
 def menu_gestion_vias(coop, zonas):
     while True:
         print("\n  ╔══════════════════════════════╗")
@@ -128,8 +139,8 @@ def menu_gestion_vias(coop, zonas):
         print("3. Abrir una vía")
         print("0. Volver")
 
-        op = leer_entero_rango("Opción: ",0, 3)
-        
+        op = leer_entero_rango("Opción: ", 0, 3)
+
         if op == 0:
             break
 
@@ -142,7 +153,7 @@ def menu_gestion_vias(coop, zonas):
             d = leer_entero_rango("Zona de DESTINO a cerrar (número): ", 1, 8)
             origen_str = zonas[o]
             destino_str = zonas[d]
-            
+
             ok = coop.mapa.cerrar_via(origen_str, destino_str)
             if ok:
                 print(f"Vía {origen_str} -> {destino_str} cerrada.")
@@ -161,6 +172,7 @@ def menu_gestion_vias(coop, zonas):
                 print(f"Vía {origen_str} -> {destino_str} abierta ({distancia}m).")
             else:
                 print(f"Esas zonas tienen no tienen problemas de vias o esa via no es válida.")
+
 
 def main():
     limpiar_pantalla()
@@ -192,7 +204,7 @@ def main():
         op = leer_entero_rango("Opción: ", 0, 10)
         if op == 0:
             limpiar_pantalla()
-            print("Sistema ejecutado con éxito.")
+            print("Proceso finalizado con éxito.")
             break
 
         elif op == 1:
@@ -215,6 +227,7 @@ def main():
             coop.mostrar_operadores()
         elif op == 10:
             menu_gestion_vias(coop, zonas)
+
 
 if __name__ == "__main__":
     main()
