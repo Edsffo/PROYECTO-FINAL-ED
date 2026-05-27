@@ -7,14 +7,23 @@ class Conductor:
         self.cedula = cedula
         self.telefono = telefono
         self.zona_actual = zona_actual
-        self.servicios_habilitados = servicios_habilitados
+        self.servicios_habilitados = servicios_habilitados  # lista de strings
         self.disponible = True
         self.servicio_actual = None
+
+    def puede_atender(self, tipo_servicio):
+        return tipo_servicio in self.servicios_habilitados
+
+    def asignar(self):
+        self.disponible = False
+
+    def liberar(self):
+        self.disponible = True
 
     def __str__(self):
         estado = "Disponible" if self.disponible else "Ocupado"
         return f"{self.nombre} - {self.placa} - {estado}"
-        
+
     def resumen(self):
         return {
             "nombre": self.nombre,

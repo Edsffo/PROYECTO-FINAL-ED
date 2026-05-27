@@ -1,13 +1,13 @@
-class Nodo:    
+class Nodo:
     def __init__(self, dato):
         self.dato = dato
-        self.siguiente: Nodo = None
+        self.siguiente = None
 
 class ListaSimple:
     def __init__(self):
-        self.frente: Nodo = None
-        self.fin: Nodo = None
-    
+        self.frente = None
+        self.fin = None
+
     def insertar_inicio(self, dato):
         nuevo_nodo = Nodo(dato)
         if self.frente is None:
@@ -16,7 +16,7 @@ class ListaSimple:
         else:
             nuevo_nodo.siguiente = self.frente
             self.frente = nuevo_nodo
-    
+
     def insertar_fin(self, dato):
         nuevo_nodo = Nodo(dato)
         if self.frente is None:
@@ -49,6 +49,36 @@ class ListaSimple:
             self.fin = tmp
             self.fin.siguiente = None
         return valor
+
+    def buscar(self, criterio):
+        tmp = self.frente
+        while tmp:
+            if criterio(tmp.dato):
+                return tmp.dato
+            tmp = tmp.siguiente
+        return None
+
+    def eliminar(self, criterio):
+        anterior = None
+        actual = self.frente
+        while actual:
+            if criterio(actual.dato):
+                if anterior:
+                    anterior.siguiente = actual.siguiente
+                else:
+                    self.frente = actual.siguiente
+                if actual == self.fin:
+                    self.fin = anterior
+                return True
+            anterior = actual
+            actual = actual.siguiente
+        return False
+
+    def iterar(self):
+        tmp = self.frente
+        while tmp:
+            yield tmp.dato
+            tmp = tmp.siguiente
 
     def recorrer(self):
         tmp = self.frente

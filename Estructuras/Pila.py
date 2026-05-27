@@ -13,6 +13,7 @@ class Pila:
         nuevo_nodo.siguiente = self._cima
         self._cima = nuevo_nodo
         self.tamaño += 1
+        return True
 
     def pop(self):
         if self.empty():
@@ -23,9 +24,7 @@ class Pila:
         return dato
 
     def top(self):
-        if self.empty():
-            return None
-        return self._cima.dato
+        return None if self.empty() else self._cima.dato
 
     def empty(self):
         return self._cima is None
@@ -33,9 +32,13 @@ class Pila:
     def size(self):
         return self.tamaño
 
-    def print_stack(self):
+    def iterar(self):
         actual = self._cima
         while actual is not None:
-            print(actual.dato, end=" ")
+            yield actual.dato
             actual = actual.siguiente
+
+    def print_stack(self):
+        for dato in self.iterar():
+            print(dato, end=" ")
         print()

@@ -6,14 +6,26 @@ class Solicitud:
         self.zona_origen = zona_origen
         self.zona_destino = zona_destino
         self.tipo_servicio = tipo_servicio
-        self.estado = "En espera" # "en atención, completado, cancelado"
+        self.estado = "en espera"
         self.conductor_asignado = None
         self.tarifa = 0
         self.tiempo_recogida = 0
-    
+
     def __str__(self):
         return f"Solicitud #{self.id} - {self.usuario} - {self.estado}"
-    
+
+    def asignar_conductor(self, conductor, tarifa, tiempo_recogida):
+        self.conductor_asignado = conductor
+        self.tarifa = tarifa
+        self.tiempo_recogida = tiempo_recogida
+        self.estado = "en atención"
+
+    def finalizar(self):
+        self.estado = "finalizada"
+
+    def cancelar(self):
+        self.estado = "cancelada"
+
     def resumen(self):
         return {
             "id": self.id,

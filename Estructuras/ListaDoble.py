@@ -183,3 +183,15 @@ class ListaDoble:
             print(tmp.dato, end="<-")
             tmp = tmp.anterior
         print("null", end="\n")
+
+    def iterar_adelante(self):
+        tmp = self.frente
+        while tmp:
+            yield tmp.dato
+            tmp = tmp.siguiente
+
+    def iterar_atras(self):
+        tmp = self.fin
+        while tmp:
+            yield tmp.dato
+            tmp = tmp.anterior
