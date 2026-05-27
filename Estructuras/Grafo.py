@@ -180,12 +180,14 @@ class Grafo:
         verticeDestino = self.buscarVertice(destino)
         if verticeOrigen is not None and verticeDestino is not None:
             verticeOrigen.listaAdyacencia.agregar(verticeDestino, peso)
+            verticeDestino.listaAdyacencia.agregar(verticeOrigen, peso)
 
     def eliminarArista(self, origen, destino):
         verticeOrigen = self.buscarVertice(origen)
         verticeDestino = self.buscarVertice(destino)
         if verticeOrigen is not None and verticeDestino is not None:
             verticeOrigen.listaAdyacencia.eliminar(verticeDestino)
+            verticeDestino.listaAdyacencia.eliminar(verticeOrigen)
 
     def agregarVertice(self, dato):
         if self.buscarVertice(dato) is not None:

@@ -160,7 +160,7 @@ def menu_gestion_vias(coop, zonas):
             if ok:
                 print(f"Vía {origen_str} -> {destino_str} abierta ({distancia}m).")
             else:
-                print(f"Esa conexión ya existe o los vértices no son válidos.")
+                print(f"Esas zonas tienen no tienen problemas de vias o esa via no es válida.")
 
 def main():
     limpiar_pantalla()
