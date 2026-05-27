@@ -40,7 +40,7 @@ def leer_entero_rango(mensaje, minimo, maximo):
 
 
 def mostrar_tipos_servicio(tipos):
-    print("\nTIPOS DE SERVICIO: ")
+    print("\nTIPOS DE SERVICIOS: ")
     for k, v in tipos.items():
         print(f"{k}. {v['descripcion']}")
 
@@ -59,7 +59,7 @@ def menu_nueva_solicitud(coop, zonas, tipos_servicio):
     telefono = input("Teléfono del cliente: ")
     telefono = telefono.strip()
     limpiar_pantalla()
-    print(f"Solicitud registrada correctamente con datos: [{nombre} | {telefono}]")
+    print(f"Solicitud registrada correctamente con los datos: [{nombre} | {telefono}]")
 
     coop.mapa.mostrar_zonas()
     zona_origen_cod = leer_entero_rango("Zona de ORIGEN (número): ", 1, 8)
@@ -204,7 +204,7 @@ def main():
         op = leer_entero_rango("Opción: ", 0, 10)
         if op == 0:
             limpiar_pantalla()
-            print("Sistema ejecutado con éxito.")
+            print("Proceso finalizado con éxito.")
             break
 
         elif op == 1:
